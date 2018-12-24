@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <Configurations>Debug;Release;DEV;UAT;PROD</Configurations>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EntityFramework" Version="6.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\1.Domain\Domain\Domain.csproj" />
+    <ProjectReference Include="..\..\1.Domain\Mapping\Mapping.csproj" />
+    <ProjectReference Include="..\..\1.Domain\Models\Models.csproj" />
+  </ItemGroup>
+
+</Project>
