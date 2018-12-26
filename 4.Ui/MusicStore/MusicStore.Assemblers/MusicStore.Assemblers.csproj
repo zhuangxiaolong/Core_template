@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="autofac" Version="4.8.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MusicStore.DTOS\MusicStore.DTOS.csproj" />
+    <ProjectReference Include="..\MusicStore.IAssemblers\MusicStore.IAssemblers.csproj" />
+  </ItemGroup>
+
+</Project>

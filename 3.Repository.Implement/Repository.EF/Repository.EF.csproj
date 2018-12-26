@@ -8,12 +8,8 @@
   <ItemGroup>
     <PackageReference Include="EntityFramework" Version="6.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\1.Domain\Domain\Domain.csproj" />
-    <ProjectReference Include="..\..\1.Domain\Mapping\Mapping.csproj" />
-    <ProjectReference Include="..\..\1.Domain\Models\Models.csproj" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.5.0" />
+    <PackageReference Include="System.Data.Common" Version="4.3.0" />
   </ItemGroup>
 
 </Project>

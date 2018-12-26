@@ -1,0 +1,34 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="4.8.1" />
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.3.1" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+    <PackageReference Include="nlog" Version="4.5.11" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="4.0.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="4.0.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="4.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\1.Domain\dotnet_Domain\dotnet_Domain.csproj" />
+    <ProjectReference Include="..\..\..\1.Domain\dotnet_Mapping\dotnet_Mapping.csproj" />
+    <ProjectReference Include="..\..\..\1.Domain\dotnet_Models\dotnet_Models.csproj" />
+    <ProjectReference Include="..\..\..\3.Repository.Implement\dotnet_Repository.EF\dotnet_Repository.EF.csproj" />
+    <ProjectReference Include="..\dotnet_MusicStore.Assemblers\dotnet_MusicStore.Assemblers.csproj" />
+    <ProjectReference Include="..\dotnet_MusicStore.Common\dotnet_MusicStore.Common.csproj" />
+    <ProjectReference Include="..\dotnet_MusicStore.DTOS\dotnet_MusicStore.DTOS.csproj" />
+    <ProjectReference Include="..\dotnet_MusicStore.IAssemblers\dotnet_MusicStore.IAssemblers.csproj" />
+  </ItemGroup>
+
+</Project>

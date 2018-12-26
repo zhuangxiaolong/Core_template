@@ -4,11 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Repository.EF;
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
+using MusicStore.Assemblers;
+using Swashbuckle.AspNetCore.Swagger;
+using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace MusicStore.Client.Apis
 {
@@ -37,18 +40,11 @@ namespace MusicStore.Client.Apis
         }
 
         public IConfiguration Configuration { get; }
+        public IContainer Container { get; set; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            services.Configure<CookiePolicyOptions>(options =>
-            {
-                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-                options.CheckConsentNeeded = context => true;
-                options.MinimumSameSitePolicy = SameSiteMode.None;
-            });
-
-
             services.AddScoped<IUnitOfWork>(e =>
             {
                 //var config = e.GetRequiredService<Configuration>();
@@ -56,7 +52,20 @@ namespace MusicStore.Client.Apis
                 return new MusicStoreContext(connection);
             });
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc();
+
+            //services.AddSwaggerGen(c =>
+            //{
+            //    c.SwaggerDoc("v1", new Info { Title = "Music Store API", Version = "v1" });
+            //});
+
+            services.RegistRepository();
+
+            var builder = new ContainerBuilder();
+            registServices(builder);
+            builder.Populate(services);
+            Container = builder.Build();
+            return new AutofacServiceProvider(Container);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -64,6 +73,7 @@ namespace MusicStore.Client.Apis
         {
             if (env.IsDevelopment())
             {
+                app.UseBrowserLink();
                 app.UseDeveloperExceptionPage();
             }
             else
@@ -72,7 +82,6 @@ namespace MusicStore.Client.Apis
             }
 
             app.UseStaticFiles();
-            app.UseCookiePolicy();
 
             app.UseMvc(routes =>
             {
@@ -80,6 +89,18 @@ namespace MusicStore.Client.Apis
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            //app.UseSwagger();
+            //app.UseSwaggerUI(opt =>
+            //{
+            //    opt.SwaggerEndpoint("/swagger/v1/swagger.json", "Music Store API");
+            //   // opt.RoutePrefix = string.Empty;
+            //});
+        }
+        private void registServices(ContainerBuilder builder)
+        {
+            builder.RegisterInstance(Configuration);
+            builder.RegistAssembler();
         }
     }
 }
